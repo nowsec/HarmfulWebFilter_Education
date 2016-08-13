@@ -229,7 +229,7 @@ int __cdecl main(int argc, char **argv)
 		//get host
 		for (int i = STARTHTTPOFFSET; i < packet_len; i++)	//HTTP에서 패킷에 호스트의 주소를 알기 위한 함수다.
 		{
-			if (tcppacket[i] == 'H' && tcppacket[i + 1] == 'o' && tcppacket[i + 2] == 's' && tcppacket[i + 3] == 't')	//Wireshark에서 패킷을 보면 알겠지만 Host:nate.com 이런식으로 데이터가 들어있다.
+			if (strncmp((char*)tcppacket + i, "Host", strlen("Host"))==0)	//Wireshark에서 패킷을 보면 알겠지만 Host:nate.com 이런식으로 데이터가 들어있다.
 			{																											//그러니 패킷에서 Host가 들어있는 부분을 찾아보자
 				mystrcpy(site, tcppacket + i + 5);			//패킷에서 호스트의 주소를 찾았으면 Host:다음의 주소들을 site에 넣어준다.
 				break;
